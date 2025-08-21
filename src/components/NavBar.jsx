@@ -1,15 +1,32 @@
-import CartWidget from './CartWidget.jsx'
+import { useEffect, useState } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { getCategories } from "../data/api.js";
 
 export default function NavBar() {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    let active = true;
+    getCategories().then((cats) => active && setCategories(cats));
+    return () => { active = false; };
+  }, []);
+
   return (
-    <nav style={{ display: "flex", alignItems: "center", gap: "16px", padding: "12px 16px", borderBottom: "1px solid #eee" }}>
-      <div style={{ fontWeight: 800, fontSize: 18 }}>MiTiendita</div>
-      <a href="#" style={{ textDecoration: "none" }}>Inicio</a>
-      <a href="#" style={{ textDecoration: "none" }}>Productos</a>
-      <a href="#" style={{ textDecoration: "none" }}>Contacto</a>
-      <div style={{ marginLeft: "auto" }}>
-        <CartWidget />
-      </div>
-    </nav>
-  )
+    <header className="sticky">
+      <nav className="nav">
+        <Link to="/" className="brand">reactcoder</Link>
+        <div className="cats">
+          {categories.map((c) => (
+            <NavLink
+              key={c.id}
+              to={`/category/${c.id}`}
+              className={({ isActive }) => isActive ? "badge active" : "badge"}
+            >
+              {c.name}
+            </NavLink>
+          ))}
+        </div>
+      </nav>
+    </header>
+  );
 }
