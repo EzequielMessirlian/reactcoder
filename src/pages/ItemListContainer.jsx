@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getProducts, getProductsByCategory } from "../data/api.js";
-import ProductCard from "../components/ProductCard.jsx";
+import ItemList from "../components/ItemList.jsx";
 
 export default function ItemListContainer({ greeting }) {
   const { categoryId } = useParams();
@@ -24,11 +24,13 @@ export default function ItemListContainer({ greeting }) {
       <h2 style={{ marginBottom: 12 }}>{greeting} {categoryId ? `» ${categoryId}` : "» Todos"}</h2>
       {loading && <p>Cargando...</p>}
       {!loading && items.length === 0 && <p>No hay productos en esta categoría.</p>}
-      <section className="grid">
+      <ItemList items={items} />
+      {/* Mantener separación contenedor/presentacional */}
+      {/* <section className="grid">
         {items.map((item) => (
           <ProductCard key={item.id} item={item} />
         ))}
-      </section>
+      </section> */}
     </main>
   );
 }
