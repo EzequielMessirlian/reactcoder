@@ -1,6 +1,8 @@
+
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { getCategories } from "../data/api.js";
+import CartWidget from "./CartWidget.jsx";
 
 export default function NavBar() {
   const [categories, setCategories] = useState([]);
@@ -26,6 +28,7 @@ export default function NavBar() {
             </NavLink>
           ))}
         </div>
+              <CartWidget />
       </nav>
     </header>
   );

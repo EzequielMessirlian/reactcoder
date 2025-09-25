@@ -1,10 +1,4 @@
-# Node / Vite
-node_modules
+﻿node_modules
 dist
-.vite
-*.log
-.DS_Store
-
-# Env (si luego usás variables)
 .env
 .env.*

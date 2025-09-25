@@ -3,8 +3,10 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getProductById } from "../data/api.js";
 import ItemCount from "../components/ItemCount.jsx";
+import { useCart } from "../context/CartContext.jsx";
 
 export default function ItemDetailContainer() {
+  const { addItem } = useCart();
   const { id } = useParams();
   const [item, setItem] = useState(null);
   const [loading, setLoading] = useState(true);
